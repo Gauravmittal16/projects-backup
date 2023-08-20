@@ -1,0 +1,48 @@
+<html>
+<head><title> ex</title>
+<style type="text/css">
+
+
+.isection{
+width:700px;
+height:400px;}
+
+
+.myslides
+{width:700px;
+height:400px;
+display:none;
+}
+
+</style>
+</head>
+<body>
+<div class="isection"><img  class="myslides"src="Lighthouse.jpg" alt="pic"/><img class="myslides"src="Tulips.jpg" alt="pic"/><img class="myslides"src="penguins.jpg" alt="pic"/><img class="myslides"src="dfc.jpg" alt="pic"/><img class="myslides"src="myi.jpg" alt="pic"/><img class="myslides"src="mnj.jpg" alt="pic"/>
+
+
+
+
+
+
+<script type="text/javascript">
+var slideindex=0;
+carouse();
+function carouse()
+{
+var i;
+var x=document.getElementsByClassName("myslides");
+for(i=0;i<x.length;i++)
+{
+x[i].style.display="none";
+}
+slideindex++;
+if(slideindex>x.length)
+{
+slideindex=1;
+}
+x[slideindex-1].style.display="block";
+setTimeout(carouse,1500);
+}
+<
+</body>
+</html>

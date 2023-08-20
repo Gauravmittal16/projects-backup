@@ -1,0 +1,46 @@
+h1
+{
+color:blue;
+text-decoration:underline;
+text-align:center;
+text-shadow: 2px 2px 4px black;
+border-style:solid;
+border-radius:10px;
+border-width:5px;
+border-color:yellow;
+text-transform:capitalise;
+font-style:italic;
+text:50px;
+}
+p
+{
+font-family:comic sans ms;
+}
+a:hover
+{
+text-decoration:none;
+color:green;
+}
+h2
+{
+text-align:right;
+}
+body
+{
+background-color:red;
+-webkit-animation-name:example;
+-webkit-animation-duration:14s ;
+animation-name:example;
+animation-duration:14s ;
+}
+
+@keyframes example
+{
+0%{background-color:red;}
+25%{background-color:yellow;}
+50%{background-color:blue;}
+75%{background-color:pink;}
+100%{background-color:green;}
+
+
+}

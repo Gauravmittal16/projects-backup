@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Simple home page</title>
+</head>
+<script type="text/javascript">
+	function frm() 
+	{
+		var data="<input type='text' placeholder='Username/E-mail' id='user'><br><input type='password' placeholder='Password' id='pass'><br>		<input type='submit' value='Login'>";
+	document.getElementById('chng').innerHTML=data;		// body...
+	}
+</script>
+<body>
+	<div id="header">
+		<h2 align="center">DONATION Portal</h2>
+        <h4 align="center">Stand for your country Today!</h4>
+	</div>
+<div id="content">
+	<a href="">Login</a><br>
+	<a href="">Register</a>
+</div>
+
+
+<div id="loginbody">
+	<form align='center' action="" method="">
+		<input type="text" name="" placeholder="Username/E-mail" id="user"><br>
+		<input type="password" name="" placeholder="Password" id="pass"><br>
+		<input type="submit" name="" value="Login">
+	</form>
+</div>
+
+<div id="signupbody">
+	<form>
+		<input type="text" name="" placeholder="Enter your name" id="user"><br>
+		<input type="email" name="" placeholder="E-mail address"><br>
+		<input type="password" name="" placeholder="Create password" id="pass"><br>
+		<input type="password" name="" placeholder="Confirm password"><br>
+		<input type="submit" name="" value="Register">
+	</form>
+</div>
+
+
+
+<form align="center">
+	<div id="chng">
+	<button onclick="frm()">Login</button><br>	
+	<button>Register</button>	
+	</div>
+</form>
+
+                        <!--To produce raw code-->
+<div>
+	<h4 align="center">+ Add User</h4>
+	<form align='center' action="adduser">
+		<input type="text" name="" placeholder="Enter your name" id="user"><br>
+		<input type="text" name="" placeholder="Userid"><br>
+		<input type="text" name="" placeholder="Address"><br>
+		<input type="submit" name="" value="Register">
+	</form>
+</div>
+
+
+</body>
+</html>

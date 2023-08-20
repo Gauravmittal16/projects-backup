@@ -1,0 +1,64 @@
+
+<html>
+<head><title>form</title>
+<style type="text/css">
+table,td
+{
+height:50px;
+width:40%;
+font-style:bold;
+}
+.fn
+{
+width:200px;
+height:30px;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<h1 align='center'>Application Form</h1>
+<form action="dp.php" method="get"  onsubmit=" return check(event);">
+<table align='center'><tr><td >First Name</td><td ><input type="text" name="name" class="fn"/></td>
+<tr><td>Last Name</td><td><input type="text" name="lname"  class="fn"/></td>
+<tr><td>Father's Name</td><td><input type="text" name="fname"  class="fn"/></td>
+<tr><td>Gender</td><td><input type="radio" name="gender"/>M<input type="radio" name="gender"/>F<input type="radio" name="gender"/>Others</td>
+<tr><td>Mobile no.</td><td><input type="text" name="mob"  class="fn"/></td>
+<tr><td>Country</td><td><select class="fn"><option>Argentina</option><option>Africa</option><option>India</option><option>USA</option><option>UAE<option></select></td>
+<tr><td>Address</td><td><input type="text" name="add"  class="fn"/></td>
+<tr><td>Create password</td><td><input type="password" name="pass"  class="fn"/></td>
+<tr><td>Profile</td><td><input type="file" name="image"   class="fn"/></td>
+<tr><td>Age</td><td><input type="text" name="age"  class="fn"/></td>
+<tr><td>Course</td><td><input type="checkbox" name="course"/>B.Tech<input type="checkbox" name="course"/>MCA<input type="checkbox" name="course"/>MBA</td>
+<tr><td></td><td><input type="reset" value="reset" >                              <input type="submit" value="submit" ></td></tr>
+
+
+</table>
+<script type="text/javascript">
+function check(e)
+{
+var result=true;
+var i=document.getElementsByTagName("input");
+for(x=0;x<i.length;x++)
+{
+if(i[x].value.length==0)
+{alert(' Error ! Please fill required credentials');
+result=false;
+return(result);}
+}
+var x=confirm("Do you want to continue ?");
+if(x==true)
+{alert(' You have submitted');
+}
+else
+{alert('cancelled');
+e.preventDefault();
+}
+return(result);
+}
+</script>
+</form>
+</body></html>

@@ -1,0 +1,86 @@
+<html>
+<head><title>this project</title>
+<link rel="stylesheet" type="text/css" href="nstyle.css"
+</head>
+<body>
+<h1>Mywebsite.com</h1>
+<ul>
+<li><a href="thispro.html" >Home</a></li>
+<li><a href="about.html" >Contacts</a></li>
+<li><a href="bunny.html" >About Us</a></li>
+<li><a href="pp.html" >News</a></li>
+<li><a href="calm.html" >Images</a></li>
+<li><a href="discover.html" >Live</a></li>
+<li><a href="cvb.html" >Student</a></li>
+<li><a href="mypro.html" >Faculty</a></li>
+<li><a href="mj.html" >Jobs</a></li>
+<li ><a href="grab.html" >More</a></li>
+</ul>
+<div class="container">
+<div class="isection"><img  class="myslides w3-animate-left"src="F:\docs\Lighthouse.jpg" alt="pic"/><img class="myslides"src="F:\docs\Tulips.jpg" alt="pic"/><img class="myslides"src="F:\docs\penguins.jpg" alt="pic"/>
+<div style="text-align:center">
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+</div>
+</div>
+
+
+
+<!--
+
+<div class="programmes">
+<table>
+<tr><th>Top Programmes</th></tr>
+<tr><td>B.Tech(All Branches) </td></tr>
+<tr><td>BCA </td></tr>
+<tr><td>MCA</td></tr>
+<tr><th>Functions</th></tr>
+<tr><td>Kite Competetion</td></tr>
+<tr><td>Cultural Fest</td></tr>
+<tr><td>Technical Fest</td></tr>
+</table>
+</div>
+
+-->
+
+
+
+
+
+
+<marquee id="m1"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+<marquee id="m2"behavior="alternate"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+<script type="text/javascript">
+var slideindex=0;
+var count=0;
+carouse();
+function carouse()
+{
+var i;
+count=count+1;
+
+var x=document.getElementsByClassName("myslides");
+var dots=document.getElementsByClassName("dot");
+for(i=0;i<x.length;i++)
+{
+x[i].style.display="none";
+}
+if(count>=2)
+{
+dots[slideindex-1].style="background-color:grey;"
+}
+slideindex++;
+if(slideindex > x.length){slideindex=1;}
+x[slideindex-1].style.display = "block";
+dots[slideindex-1].style="background-color:white;"
+setTimeout(carouse,1500);
+}
+</script>
+
+
+
+</body>
+</html>
