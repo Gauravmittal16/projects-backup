@@ -1,0 +1,13 @@
+{
+  "name": "npm_commands",
+  "version": "1.0.0",
+  "description": "firstapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "release": "npm run build",
+    "build": "npm run build"
+  },
+  "author": "hacker",
+  "license": "ISC"
+}
