@@ -1,0 +1,114 @@
+<html>
+<head>
+<style type="text/css">
+h1{
+color:yellow;
+height:110px;
+font-size:40px;}
+body
+{background-color:dimgrey;
+}
+.modify{
+width:350px;
+height:35px;
+border-top:none;
+border-left:none;
+border-right:none;
+border-bottom: 1px solid black;}
+table,td{
+	height:60px;
+	width:38%;
+	font-size:20px;
+	font-family:comic sans MS;
+	top:100px;
+	color:black;
+	background-color:white;
+	text-align:center;
+}
+table{
+	border:1px solid white;
+ 	 box-shadow: 0px 12px 12px 10px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+	 th{  font-weight:BOLD;
+		 text-align:center;
+		 font-family:Arial Rounded MT;
+		 font-size:30px;
+	         color:black;}
+	 a
+	 {
+	 text-decoration:none;
+	 font-size:16px;
+	 font-family:calibri;
+	 color:lightblue;
+	 
+	 }
+	 #sub{width:350px;
+	 height:40px;
+	 border:1px solid green;
+	 color:white;
+	 }
+	 #sub:hover
+	 {
+	 box-shadow: 0px 3px 4px 4px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+	 
+	 #decor{
+	 color:blue;
+	 text-decoration:none;
+	 
+	}
+	#decor:hover{
+	text-decoration:underline;
+	color:green;
+	}
+	 #frdecr
+	 {color:blue;
+	 text-decoration:none;
+	 
+	 }
+	 #frdecr:hover{
+	text-decoration:underline;
+	color:red;
+	}
+	</style>
+	 </head>
+<body>
+<h1 align='center'>Mywebsite.com</h1>
+<form action="pcnm.php" method="GET" onsubmit="return check(event);">
+<table align='center' style="top:100px">
+<tr><th colspan="2"> My Account </th></tr>
+<tr><td colspan="2"><input type="text" class="modify" placeholder="username"  name="username"></td></tr>
+<tr><td colspan="2"><input type="password" class="modify" placeholder="password" name="password"></td></tr>
+<tr><td colspan="2"><input type="submit"  id="sub" value="Log In" style="background-color:4183D7"/></td></tr>
+<tr><td > Not yet a member <a  id="decor" href="#">Sign up?</a></td><td><a id="frdecr" href="#">Forgot password ?</a></td></tr>
+</table>
+</form> 
+<script type="text/javascript">
+function check(e)
+{
+var result=true;
+var i=document.getElementsByTagName("input");
+for(x=0;x<i.length;x++)
+{
+if(i[x].value.length==0)
+{alert('Please complete required credentials');
+result=false;
+return(result);}
+}
+var x=confirm("Do you want to continue ?");
+if(x==true)
+{alert(' You have submitted');
+}
+else
+{alert('cancelled');
+e.preventDefault();
+}
+return(result);
+}
+</script>
+</script>
+</body>
+</html>
+  

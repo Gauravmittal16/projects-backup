@@ -1,0 +1,95 @@
+
+<html>
+<head><title>this project</title>
+<link rel="stylesheet" type="text/css" href="makeup.css"
+</head>
+<body>
+<div class="header"><img src="logo.png" alt="logo"/><h1 >Pan Pacific, Singapore</h1><a id="s1" href="webform.html">Sign Up</a><a href="signin.php"> Login Now</a></div>
+<ul>
+<li><a href="thispro.html" >Home</a></li>
+<li class="dropdown"><a class="dropbtn" href="about.html" >Contact Us</a><div class="dropdown-content"><a href="#" >gaurav</a><a href="#" >divyansh</a><a href="#" >aayush</a></div></li>
+<li><a href="aboutus.html" >About </a></li>
+<li><a href="pp.html" >News</a></li>
+<li><a href="mywebi.html" >Images</a></li>
+<li><a href="discover.html" >Live</a></li>
+<li><a href="cvb.html" >Videos</a></li>
+<li><a href="mypro.html" >Facilities</a></li>
+<li class="dropdown"><a class="dropbtn"href="mj.html" >Jobs</a><div class="dropdown-content"><a href="#" >sdc</a><a href="#" >ldc</a><a href="#" >hdc</a></div></li>
+<li class="dropdown"><a class="dropbtn" href="grab.html" >More</a><div class="dropdown-content"><a href="#" >hier</a><a href="#" >fire</a><a href="#" >status</a></div></li>
+</ul>
+<marquee id="m1" ><h3>SPECIAL DIWALI DISCOUNTTS !*   Amazing deals*   Great Rooms*  Book Today to Avail this offer</h3></marquee>
+<div class="container">
+<div class="isection"><img  class="myslides"src="ofer1.jpg" alt="pic"/><img class="myslides"src="ofer2.jpg" alt="pic"/><img class="myslides"src="ofer3.jpg" alt="pic"/><img class="myslides"src="ofer4.jpg" alt="pic"/><img class="myslides"src="ofer5.jpg" alt="pic"/><img class="myslides"src="ofer6.jpg" alt="pic"/>
+<div style="text-align:center">
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+</div>
+</div>
+<!--<marquee id="m2"behavior="alternate"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+-->
+<h2 align='center' style="color:red">Important Links !</h2>
+
+<table id="t1">
+<tr><td><marquee behavior="alternate"><a href="#" >Scholarship portal</a></marquee></td>
+</tr>
+<tr><td><a href="#" >News Portal</a></td>
+</tr>
+<tr><td><a href="#" >Check Status</a></td>
+</tr>
+<tr><td><a href="#" >Renewal</a></td>
+</tr>
+<tr><td><a href="#" >Referals</a></td>
+</tr>
+</table><table id="t2">
+<tr><td><a href="#" >Scholarship portal</a></td>
+</tr>
+<tr><td><a href="#" >News Portal</a></td>
+</tr>
+<tr><td><a href="#" >Check Status</a></td>
+</tr>
+<tr><td><a href="#" >Renewal</a></td>
+</tr>
+<tr><td><a href="#" >Referals</a></td>
+</tr>
+</table>
+<h4 style="color:white;">In his seminal paper on the urban land market, Alonso notes that when a purchaser acquires land, he acquires two goods (land and location) in one transaction, and a single payment is made for the combination. Thus it is possible to trade off a quantity of land against location, the principle underlying Alonso's bid-rent analysis. It is argued that the Alonso model of bid-rent analysis is still applicable to those types of economic activity which display a hierarchy of use in terms of distance from the city centre. The concern here is with hotel location, and we develop a model of the Alonso type which casts light upon the intraurban location decisions of hotels.</h4>
+<marquee id="m3"><img class="blogs" src="sap.jpg" height="80"alt="ourblog"/><img class="blogs" src="mittal.png" height="80" alt="ourblog"/><img class="blogs" src="infosys.png" height="80" alt="ourblog"/><img class="blogs" src="bitplus.png" height="80" alt="ourblog"/><img class="blogs" src="intel.png" height="80" alt="ourblog"/><img class="blogs" src="codemaster.jpg" height="80" alt="ourblog"/><img class="blogs" src="spft.jpg" height="80" alt="ourblog"/></marquee>
+<div class="footer">
+<h2 align='center' style="color:white">Thanks for visiting this page!<h2>
+<h2 align='center'  style="color:white"> All Rights Reserved.Copyright 2018</h2>
+ <h2 align='center'  style="color:white"> For More Visit on www.Mywebprojects.co.in</h2>
+ <h2 style="color:white"> E-mail Us: myweb18@hotmail.com  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Designed&Developed by:Gaurav Mittal</h2> 
+</div>
+<script type="text/javascript">
+var slideindex=0;
+var count=0;
+carouse();
+function carouse()
+{
+var i;
+count=count+1;
+
+var x=document.getElementsByClassName("myslides");
+var dots=document.getElementsByClassName("dot");
+for(i=0;i<x.length;i++)
+{
+x[i].style.display="none";
+}
+if(count>=2)
+{
+dots[slideindex-1].style="background-color:white;"
+}
+slideindex++;
+if(slideindex > x.length){slideindex=1;}
+x[slideindex-1].style.display = "block";
+dots[slideindex-1].style="background-color:white; width:8px; height:8px;"
+setTimeout(carouse,3000);
+}
+</script>
+</body>
+</html>

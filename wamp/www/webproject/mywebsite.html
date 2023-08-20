@@ -1,0 +1,75 @@
+
+
+<html>
+<head><title>this project</title>
+<link rel="stylesheet" type="text/css" href="gstyle.css"
+</head>
+<body>
+<div class="header"><img src="logo.png" alt="logo"/><h1 >Mywebsite.com</h1></div>
+<ul>
+<li><a href="thispro.html" >Home</a></li>
+<li class="dropdown"><a class="dropbtn" href="about.html" >Contacts</a><div class="dropdown-content"><a href="#" >gaurav</a><a href="#" >divyansh</a><a href="#" >aayush</a></div></li>
+<li><a href="aboutus.html" >About Us</a></li>
+<li><a href="pp.html" >News</a></li>
+<li><a href="mywebi.html" >Images</a></li>
+<li><a href="discover.html" >Live</a></li>
+<li><a href="cvb.html" >Student</a></li>
+<li><a href="mypro.html" >Faculty</a></li>
+<li class="dropdown"><a class="dropbtn"href="mj.html" >Jobs</a><div class="dropdown-content"><a href="#" >sdc</a><a href="#" >ldc</a><a href="#" >hdc</a></div></li>
+<li class="dropdown"><a class="dropbtn" href="grab.html" >More</a><div class="dropdown-content"><a href="#" >hier</a><a href="#" >fire</a><a href="#" >status</a></div></li>
+</ul>
+<marquee id="m1"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+<div class="isection"><img  class="myslides"src="Lighthouse.jpg" alt="pic"/><img class="myslides"src="Tulips.jpg" alt="pic"/><img class="myslides"src="penguins.jpg" alt="pic"/><img class="myslides"src="dfc.jpg" alt="pic"/><img class="myslides"src="myi.jpg" alt="pic"/><img class="myslides"src="mnj.jpg" alt="pic"/></div>
+<marquee id="m2"behavior="alternate"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+<table>
+<tr><td><marquee behavior="alternate"><a href="#" >Scholarship portal</a></marquee></td>
+</tr>
+<tr><td><a href="#" >News Portal</a></td>
+</tr>
+<tr><td><a href="#" >Check Status</a></td>
+</tr>
+<tr><td><a href="#" >Renewal</a></td>
+</tr>
+<tr><td><a href="#" >Referals</a></td>
+</tr>
+</table><table id="t2">
+<tr><td><a href="#" >Scholarship portal</a></td>
+</tr>
+<tr><td><a href="#" >News Portal</a></td>
+</tr>
+<tr><td><a href="#" >Check Status</a></td>
+</tr>
+<tr><td><a href="#" >Renewal</a></td>
+</tr>
+<tr><td><a href="#" >Referals</a></td>
+</tr>
+</table>
+<h2 align='center'>Thanks for visiting this page!<h2>
+<div class="footer">
+</div>
+
+
+<script type="text/javascript">
+var slideindex=0;
+carouse();
+function carouse()
+{
+var i;
+var x=document.getElementsByClassName("myslides");
+for(i=0;i<x.length;i++)
+{
+x[i].style.display="none";
+}
+slideindex++;
+if(slideindex>x.length)
+{
+slideindex=1;
+}
+x[slideindex-1].style.display="block";
+setTimeout(carouse,1500);
+}
+</script>
+
+
+</body>
+</html>

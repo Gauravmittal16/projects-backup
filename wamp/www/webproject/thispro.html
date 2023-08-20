@@ -1,0 +1,53 @@
+<html>
+<head><title>this project</title>
+<link rel="stylesheet" type="text/css" href="nstyle.css"
+</head>
+<body>
+<h1>Mywebsite.com</h1>
+<ul>
+<li><a href="thispro.html" >Home</a></li>
+<li><a href="about.html" >Contacts</a></li>
+<li><a href="bunny.html" >About Us</a></li>
+<li><a href="pp.html" >News</a></li>
+<li><a href="calm.html" >Images</a></li>
+<li><a href="discover.html" >Live</a></li>
+<li><a href="cvb.html" >Student</a></li>
+<li><a href="mypro.html" >Faculty</a></li>
+<li><a href="mj.html" >Jobs</a></li>
+<li ><a href="grab.html" >More</a></li>
+</ul>
+<div class="isection"><img  class="myslides w3-animate-left"src="Lighthouse.jpg" alt="pic"/><img class="myslides"src="Tulips.jpg" alt="pic"/><img class="myslides"src="penguins.jpg" alt="pic"/>
+<div style="text-align:center"><span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+</div>
+<div class="bnm"></div><div class="bm"></div><marquee id="m1"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+<marquee id="m2"behavior="alternate"><h3>this is my first web pro in html and css ,now i m try to make it more interesting by adding javascript in it!</h3></marquee>
+<script type="text/javascript">
+var slideindex=0;
+carouse();
+function carouse()
+{
+var i;
+var x=document.getElementsByClassName("myslides");
+for(i=0;i<x.length;i++)
+{
+x[i].style.display="none";
+}
+slideindex++;
+if(slideindex>x.length)
+{
+slideindex=1;
+}
+x[slideindex-1].style.display="block";
+setTimeout(carouse,2500);
+}
+</script>
+
+
+
+</body>
+</html>

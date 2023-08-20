@@ -1,0 +1,180 @@
+.header
+{
+background-color:52B3D9;
+height:130px;
+margin:0px;
+}
+.header img
+{
+float:left;
+width:100px;
+height:100px;
+}
+.header h1{
+position:relative;
+left:30px;
+top:20px;
+font-size:50px;
+}
+.header a
+{
+	position:relative;
+    left:1030px;
+	top:3px;
+	font-size:20px;
+text-decoration:none;	
+font-family:Perpetua;
+	font-weight:Bold;
+}
+.header a:hover{
+
+text-decoration:underline;
+
+
+}
+.header #s1
+{
+	left:1000px;
+	position:relative;
+	top:3px;
+	text-decoration:none;
+	font-family:Perpetua;
+	font-weight:Bold;
+}
+.header #s1:hover{
+	text-decoration:underline;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: green;
+}
+li{
+float:left;}
+
+
+li a, .dropbtn {
+width:100px;
+    display: inline-block;
+    color: black;
+    text-align: center;
+    padding:  14px 16px;
+    text-decoration: none;
+font-size:20px;
+}
+
+li a:hover, .dropdown:hover .dropbtn {
+    background-color: white;
+}
+
+li.dropdown {
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color:#f9f9f9;
+    min-width: 90px;
+    box-shadow: 0px 10px 12px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: blue;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color:hotpink;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+.isection{
+width:700px;
+height:400px;}
+
+.dot {
+	position:relative;
+  height: 6px;
+  width: 6px;
+  background-color:white;
+  border-radius: 200%;
+  display: inline-block;
+  bottom:25px;
+}
+
+
+.myslides
+{width:700px;
+height:400px;
+display:none;
+}
+#m1{background-color:pink; height:50px;
+
+}
+#m2{background-color: lightblue; height:50px;
+}
+#m3
+{background-color: rgba(255,255,255,1);
+height:80px;
+}
+
+body{
+margin:0px;
+background-image:url("by2.jpg");}
+table,td
+{text-align:center;
+border:1px solid;
+}
+table{
+
+border-collapse:collapse;
+width:30%;
+
+}
+td a{
+text-decoration:none;
+color:blue;
+
+}
+tr a:hover{
+color:red;}
+
+#t2{
+position:relative;
+ left:800px;
+bottom:105px;
+}
+.footer
+{
+	width:full;
+	height:200px;
+	position:relative;
+    background-color:black;
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

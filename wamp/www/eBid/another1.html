@@ -1,0 +1,152 @@
+
+
+
+
+
+
+
+<html>
+<head>
+ <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="jquery-3.3.1.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='mycss.css' rel='stylesheet' type='text/css'>
+
+</head>
+<body><div class="container">
+    <div class="fb-profile">
+        <img align="left" class="fb-image-lg" src="guitar2.jpg" alt="Profile image example"/>
+        <img align="left" class="fb-image-profile thumbnail" src="image1.jpg" alt="Profile image example"/>
+        <div class="fb-profile-text">
+            <h1>Paul Walker</h1>
+            <p>Girls just wanna go fun and enjoy.</p>
+			<input type="button" onclick="location.href='updatecont.html';" value="Edit" /> <a  href="#"> Log Out</a>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+
+<!-- Toady Auctions-->
+
+<div class="jumbotron text-center">
+  <h3>Wolkswagon Vanto is on Sale @$20,000</h3>
+  <h1>Event is ON</h1> 
+  <p>Paorama , SanFransisco</p> 
+ <div id="midiv"><label type="label" style ="color:blue;" onclick="read()">...more details</label>
+</div>
+      
+        <button type="button" class="btn btn-primary" data-toggle='modal' data-target='#SignupModal'>Bid Now</button>
+      
+  
+  
+</div>
+
+ <!-- Bidding modal-->
+  <div class="modal fade" id="SignupModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-headerlg text-center" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="bh"><span class="glyphicon glyphicon-user"></span> APA Chat Panel</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-pencil"></span> </label>
+              <textarea row="5" cols="50" class="form-control" id="usrname" placeholder="Your Bid"></textarea>
+            </div>
+            </div>
+              <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-send"></span> send</button>
+          </form>
+        </div>
+       
+      </div>
+      
+    </div>
+  <h2 align='center'> AUCTION GALLERY</h2>
+<!-- auction section-->
+<div id="portfolio" class="container-fluid text-center bg-grey">
+  <h3>Upcoming Auctions</h3><br>
+  <h4>What the company did</h4>
+  <div class="row text-center slideanim">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="car1.jpg" alt="Paris" width="400" height="300">
+        <p><strong>Sold imported car with best price</strong></p>
+        <p>Yes, we do best deals</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="cara.jpg" alt="New York" width="400" height="300">
+        <p><strong>strong bids gives good prices</strong></p>
+        <p>We built strong auctions</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail" style="width:400; height:300;">
+       <!-- <img src="carauc.jpg" alt="San Francisco" width="400" height="300">-->
+        <h2><strong>Sold upto 30,000 vehicles</strong></h2>
+        <p>Yes, best collection is ours</p>
+      </div>
+    </div>
+  </div><br>
+  </div>
+  <div id="portfolio" class="container-fluid text-center bg-grey">
+  <h3>Past Auctions</h3><br>
+  <h4>What the company did</h4>
+  <div class="row text-center slideanim">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="car1.jpg" alt="Paris" width="400" height="300">
+        <p><strong>Sold imported car with best price</strong></p>
+        <p>Yes, we do best deals</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="cara.jpg" alt="New York" width="400" height="300">
+        <p><strong>strong bids gives good prices</strong></p>
+        <p>We built strong auctions</p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="carauc.jpg" alt="San Francisco" width="400" height="300">
+        <p><strong>Sold upto 30,000 vehicles</strong></p>
+        <p>Yes, best collection is ours</p>
+      </div>
+    </div>
+  </div><br>
+  </div>
+  <div class="footer"></div>
+<script type="text/javascript">
+function read()
+{
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function()
+{
+  if(xhttp.readyState==4 && xhttp.status==200)
+    {
+	 document.getElementById("midiv").innerHTML=xhttp.responseText;
+	 }
+}
+xhttp.open("POST","java4s.html",true);
+xhttp.send();
+} 
+
+</script>
+
+
+
+
+
+
+
+
+
+ 
+</body></html>

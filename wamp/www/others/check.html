@@ -1,0 +1,31 @@
+<html>
+<head>
+<script type="text/javascript">
+function read()
+{
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function()
+{
+  if(xhttp.readyState==4 && xhttp.status==200)
+    {
+	 document.getElementById("midiv").innerHTML=xhttp.responseText;
+	 }
+}
+xhttp.open("POST","java4s.html",true);
+xhttp.send();
+}
+</script>
+
+</head>
+<body>
+<h2>WELCOME TO THE AJAX TUTORIALS </h2>
+<p>
+ Ajax (Asynchronous JavaScript and XML) is a method of building interactive applications for the Web that process user requests immediately.
+ Ajax combines several programming tools including JavaScript, dynamic HTML (DHTML), Extensible Markup Language (XML), cascading style sheets (CSS),
+</p><div id="midiv"><label type="label" style ="color:blue;" onclick="read()">Read more.......</label>
+</div>
+</body>
+</html>
+
+	 
+	 

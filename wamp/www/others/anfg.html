@@ -1,0 +1,28 @@
+<html>
+<head>
+<script type="text/javascript">
+function load()
+{
+var req=new XMLHttpRequest();
+req.onreadystatechange=function()
+{
+  if(req.readyState==4 && req.status==200)
+   {
+      document.getElementById("demo").innerHTML=req.responseText;
+	 }
+	 
+ }
+ req.open("GET","return.txt",true);
+ req.send();
+ }
+</script>
+
+</head>
+<body>
+
+<div id="demo" style="width: 300px; height: 30px;">Welcome to the ajax tutorials
+<;label style="color:blue; " onclick="load()">Read more...</label>
+</div>
+</body>
+</html>
+

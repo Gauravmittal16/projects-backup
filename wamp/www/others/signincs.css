@@ -1,0 +1,27 @@
+
+body
+{
+	background-color:whitecream;
+}
+.modify{
+width:200px;
+height:30px;
+
+}
+table,td{
+	height:80px;
+	width:30%;
+	font-size:20px;
+	font-family:comic sans MS;
+	top:100px;
+}
+table{
+	border:1px solid black;
+     }
+	 th{  font-weight:BOLD;
+		 text-align:center;
+		 font-family:Arial Rounded MT;
+		 font-size:30px;
+	 }
+	
+	 
