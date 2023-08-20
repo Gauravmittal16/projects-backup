@@ -1,0 +1,55 @@
+<html><head>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style type="text/css">
+.image{
+
+left:600px;
+
+border-radius: 50%;
+    height: 150px;
+    width: 150px;
+	
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+	background-image:url('image1.jpg');
+    background-color: rgba(0,0,0,.5);
+    transition: all .3s ease;
+    text-decoration: none;
+	position:absolute;
+
+}
+#changefile
+{overflow:hidden:
+height:0px;
+display:none;
+}
+.image span{ display: inline-block;
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;}
+	
+	.lbl:hover {color:white;
+	text-decoration:underline;}
+	input {position:relative;}
+</style>
+</head><body>
+<h1> hello !</h1>
+<form action="#" method="post">
+<div class="image">
+<input type="file" name="myfile" id="changefile"/>
+ <label class="lbl" onclick="myfunc();"><span class="glyphicon glyphicon-camera"></span>Update picture</label>
+</div>
+<input type="text" value="paul walker" align='center'>
+</form>
+<script>
+
+function myfunc()
+{
+document.getElementById("changefile").click();
+}
+
+</script>
+
+</body></html>
