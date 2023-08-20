@@ -1,0 +1,842 @@
+Distributed System
+
+                                     DISTRIBUTED SYSTEM   
+         
+     LAB-1
+?PROBLEM STATEMENT
+Simulate the functioning of Lamport?s Logical Clock in "C"
+
+?SOURCE CODE
+#include<stdio.h>
+#include<conio.h>
+long p1(int);
+long p2(int);
+long p3(int);
+long p4(int);
+void main()
+{
+int k;
+clrscr();
+printf("Enter process no.");
+scanf("%d",&k);
+while(!kbhit())
+{ if(k==1)
+p1(1);
+if(k==2)
+p2(1);
+if(k==3)
+p3(1);
+if(k==4)
+p4(1);
+}
+getch();
+printf("\n Logical Clock \n");
+printf("P1:%Id\n P2:%Id\n P3:%Id\n P4:%Id\n",p1(0), p2(0), p3(0), p4(0));
+getch();
+}
+long p1(int i)
+{ static long a=0;
+if(i==1)
+{ a++;
+p2(1);
+return 1;
+}
+else
+return a;
+}
+long p2(int i)
+{ static long b=0;
+if(i==1)
+{ b++;
+p3(1);
+p4(1);
+return 1;
+}
+else
+return b;
+}
+long p3(int i)
+{ static long c=0;
+if(i==1)
+{ c++;
+return 1;
+}
+else
+return c;
+}
+long p4(int i)
+{ static long d=0;
+if(i==1)
+{ d++;
+p3(1);
+return 1;
+}
+else
+return d;
+}
+
+
+LAB-2
+?PROBLEM STATEMENT
+
+
+Simulate the Distributed Mutual Exclusion in „C?.
+
+
+?SOURCE CODE
+mutex1.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+void *functionC();
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+int counter = 0;
+main()
+{
+int rc1, rc2;
+pthread_t thread1, thread2;
+/* Create independent threads each of which will execute functionC */
+if( (rc1=pthread_create( &thread1, NULL, &functionC, NULL)) )
+{
+printf("Thread creation failed: %d\n", rc1);
+}
+if( (rc2=pthread_create( &thread2, NULL, &functionC, NULL)) )
+{
+printf("Thread creation failed: %d\n", rc2);
+}
+/* Wait till threads are complete before main continues. Unless we */
+/* wait we run the risk of executing an exit which will terminate */
+/* the process and all threads before the threads have completed. */
+pthread_join( thread1, NULL);
+pthread_join( thread2, NULL);
+exit(0);
+}
+void *functionC()
+{
+pthread_mutex_lock( &mutex1 );
+counter++;
+printf("Counter value: %d\n",counter);
+pthread_mutex_unlock( &mutex1 );
+}
+Compile: cc -lpthread mutex1.c Run: ./a.out Results:
+Counter value: 1 Counter value: 2
+join1.c
+#include <stdio.h>
+#include <pthread.h>
+#define NTHREADS 10
+void *thread_function(void *);
+pthread_mutex_t mutex1 = PTHREAD_MUTEX_INITIALIZER;
+int counter = 0;
+main()
+{
+pthread_t thread_id[NTHREADS];
+int i, j;
+for(i=0; i < NTHREADS; i++)
+{
+pthread_create( &thread_id[i], NULL, thread_function, NULL );
+}
+for(j=0; j < NTHREADS; j++)
+{
+pthread_join( thread_id[j], NULL);
+}
+/* Now that all threads are complete I can print the final result. */
+/* Without the join I could be printing a value before all the threads */
+/* have been completed.*/
+printf("Final counter value: %d\n", counter);
+}
+void *thread_function(void *dummyPtr)
+{
+printf("Thread number %ld\n", pthread_self());
+pthread_mutex_lock( &mutex1 );
+counter++;
+pthread_mutex_unlock( &mutex1 );
+}
+Compile:cc-lpthreadjoin1.c Run:./a.out Results:
+Thread number 1026
+Thread number 2051
+Thread number 3076
+Thread number 4101
+Thread number 5126
+Thread number 6151
+
+Thread number 7176
+Thread number 8201
+Thread number 9226
+Thread number 10251
+Final counter value: 10
+cond1.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+pthread_mutex_t count_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t condition_var = PTHREAD_COND_INITIALIZER;
+void *functionCount1();
+void *functionCount2();
+int count = 0;
+#define COUNT_DONE 10
+#define COUNT_HALT1 3
+#define COUNT_HALT2 6
+main()
+{
+pthread_t thread1, thread2;
+pthread_create( &thread1, NULL, &functionCount1, NULL);
+pthread_create( &thread2, NULL, &functionCount2, NULL);
+pthread_join( thread1, NULL);
+pthread_join( thread2, NULL);
+printf("Final count: %d\n",count);
+exit(0);
+}
+// Write numbers 1-3 and 8-10 as permitted by functionCount2()
+void *functionCount1()
+{
+for(;;)
+{
+// Lock mutex and then wait for signal to relase mutex
+pthread_mutex_lock( &count_mutex );
+// Wait while functionCount2() operates on count
+// mutex unlocked if condition varialbe in functionCount2() signaled.
+pthread_cond_wait( &condition_var, &count_mutex );
+count++;
+printf("Counter value functionCount1: %d\n",count);
+pthread_mutex_unlock( &count_mutex );
+if(count >= COUNT_DONE) return(NULL);
+}
+}
+// Write numbers 4-7
+void *functionCount2()
+{
+
+for(;;)
+{
+pthread_mutex_lock( &count_mutex );
+if( count < COUNT_HALT1 || count > COUNT_HALT2 )
+{
+// Condition of if statement has been met.
+// Signal to free waiting thread by freeing the mutex.
+// Note: functionCount1() is now permitted to modify "count".
+pthread_cond_signal( &condition_var );
+}
+else
+{
+count++;
+printf("Counter value functionCount2: %d\n",count);
+}
+pthread_mutex_unlock( &count_mutex );
+if(count >= COUNT_DONE) return(NULL);
+}
+}
+Compile: cc -lpthread cond1.c Run: ./a.out Results:
+Counter value functionCount1: 1
+Counter value functionCount1: 2
+Counter value functionCount1: 3
+Counter value functionCount2: 4
+Counter value functionCount2: 5
+Counter value functionCount2: 6
+Counter value functionCount2: 7
+Counter value functionCount1: 8
+Counter value functionCount1: 9
+Counter value functionCount1: 10
+Final count: 10
+
+LAB-3
+?PROBLEM STATEMENT
+
+
+Implement a Distributed Chat Server using TCP Sockets in „C?.
+
+
+?SOURCE CODE
+#include <stdio.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#define PORT 5555
+#define MAXMSG 512
+int
+read_from_client (int filedes)
+{
+char buffer[MAXMSG];
+int nbytes;
+nbytes = read (filedes, buffer, MAXMSG);
+if (nbytes < 0)
+{
+/* Read error. */
+perror ("read");
+exit (EXIT_FAILURE);
+}
+else if (nbytes == 0)
+/* End-of-file. */
+return -1;
+else
+{
+/* Data read. */
+fprintf (stderr, "Server: got message: `%s'\n", buffer);
+return 0;
+}
+}
+int
+main (void)
+{
+extern int make_socket (uint16_t port);
+int sock;
+fd_set active_fd_set, read_fd_set;
+int i;
+struct sockaddr_in clientname;
+size_t size;
+
+/* Create the socket and set it up to accept connections. */
+sock = make_socket (PORT);
+if (listen (sock, 1) < 0)
+{
+perror ("listen");
+exit (EXIT_FAILURE);
+}
+/* Initialize the set of active sockets. */
+FD_ZERO (&active_fd_set);
+FD_SET (sock, &active_fd_set);
+while (1)
+{
+/* Block until input arrives on one or more active sockets. */
+read_fd_set = active_fd_set;
+if (select (FD_SETSIZE, &read_fd_set, NULL, NULL, NULL) < 0)
+{
+perror ("select");
+exit (EXIT_FAILURE);
+}
+/* Service all the sockets with input pending. */
+for (i = 0; i < FD_SETSIZE; ++i)
+if (FD_ISSET (i, &read_fd_set))
+{
+if (i == sock)
+{
+/* Connection request on original socket. */
+int new;
+size = sizeof (clientname);
+new = accept (sock,
+(struct sockaddr *) &clientname,
+&size);
+if (new < 0)
+{
+perror ("accept");
+exit (EXIT_FAILURE);
+}
+fprintf (stderr,
+"Server: connect from host %s, port %hd.\n",
+inet_ntoa (clientname.sin_addr),
+ntohs (clientname.sin_port));
+FD_SET (new, &active_fd_set);
+}
+else
+{
+/* Data arriving on an already-connected socket. */
+if (read_from_client (i) < 0) {
+close (i);
+FD_CLR (i, &active_fd_set);
+}}}}}
+
+LAB-5
+?PROBLEM STATEMENT
+
+
+Implement „Java RMI? mechanism for accessing methods of remote systems.
+
+
+?SOURCE CODE
+Hello.java
+import java.rmi.*;
+import java.rmi.server.*;
+public class Hello extends UnicastRemoteObject implements HelloInterface {
+private String message;
+public Hello (String msg) throws RemoteException {
+message = msg;
+}
+public String say() throws RemoteException {
+return message;
+}
+}
+HelloClient.java
+import java.rmi.Naming;
+public class HelloClient
+{
+public static void main (String[] argv) {
+try {
+HelloInterface hello =(HelloInterface) Naming.lookup ("//192.168.10.201/Hello");
+System.out.println (hello.say());
+}
+catch (Exception e){
+System.out.println ("HelloClient exception: " + e);}
+}
+}
+HelloInterface.java
+import java.rmi.*;
+public interface HelloInterface extends Remote {
+public String say() throws RemoteException;
+}
+HelloServer.java
+import java.rmi.Naming;
+public class HelloServer
+{
+public static void main (String[] argv)
+{
+try {
+Naming.rebind ("Hello", new Hello ("Hello,From Roseindia.net pvt ltd!"));
+System.out.println ("Server is connected and ready for operation.");
+} catch (Exception e) {
+System.out.println ("Server not connected: " + e);
+}
+}
+}
+
+LAB-6
+?PROBLEM STATEMENT
+
+
+Simulate Balanced Sliding Window Protocol in „C?.
+
+
+?SOURCE CODE
+#include <STDIO.H>
+#include <iostream.h>
+#include <string>
+#define THANKS -1
+void main()
+{
+FILE *r_File1;
+FILE *w_File2;
+int m_framecount;
+int frameCount = 0;
+long currentP = 0;
+long sentChar = 0;
+long recvedChar = 0;
+char s_name[100];
+char d_name[100];
+char *sp = s_name;
+char *dp = d_name;
+int slidingWin;
+int frameSize;
+int dataSize;
+bool isEnd = false;
+struct FRAME{
+int s_flag;
+intsequenceNo;
+char data[90];
+int n_flag;
+};
+FRAME frame;
+frame.s_flag = 126;//set start flag
+frame.n_flag = 126;//set end flag
+memset(frame.data, 0, 91);//use 0 to fill full the member array in structure frame.
+struct ACK{
+
+int s_flag;
+int nextSeq;
+int n_flag;
+}ack;
+//initialize start flag and end flag in structure ack.
+ack.s_flag = 126;
+ack.n_flag = 126;
+ack.nextSeq = NULL;
+//ask user to enter file name and size of sliding window.
+lable1 : cout <<"Please enter source file's name!"<<endl;
+cin >> sp;
+cout <<"Please enter destination file's name!"<<endl;
+cin >> dp;
+lable2: cout <<"Please chose size of sliding window 2--7"<<endl;
+cin >> slidingWin;
+if((slidingWin >7 )| (slidingWin < 2))
+{
+cout << "wrong enter"<<endl;
+goto lable2;
+}
+lable3: cout<< "Please enter the size of frame 14--101 Only!" << endl;
+cin >>frameSize;
+if((frameSize > 101) | (frameSize < 14))
+{ cout << "please enter right number!"<< endl;
+goto lable3;
+}
+//use frameSize to decide the size of data array in structor frame.
+dataSize = frameSize - 12;
+//dynamic generate a frame array with user enter's size of sliding window
+FRAME *pf = new FRAME[slidingWin];
+int seqNo = 0;
+//strat loop for transmission.
+while (ack.nextSeq != THANKS)
+{
+cout << "THE PROCESS ON SENDER SIDER..."<<endl;
+//open a source file by read mode.
+if((r_File1 = fopen(sp, "rb")) == NULL)
+
+{
+cout << "source file could not be opened please check it and re-start!" <<endl;
+goto lable1;
+}
+else
+{
+cout<<"Opening a file for read...";
+cout <<endl;
+cout <<endl;
+//after open the file, use fseek to resume the last position of a file pointer.
+//Then start to read from that position.
+fseek(r_File1,currentP,SEEK_SET);
+//start loop for create frame array
+for (int i = 0; i < slidingWin ; i++)// i is the frame array's index
+{
+frame.sequenceNo = seqNo;
+if ((seqNo >= 7) == true)
+{
+seqNo = 0;//set sequencce number
+}
+else
+{
+seqNo = seqNo +1;
+}
+//This loop is used to fill the characters read from opened file to char array data which
+//is a memeber of structure frame.
+//we have to reseve a byte for \0 which is used to identify the end of the data array.
+//that means each time we only read datasize -1 characters to the data array.
+for (int j = 0; j < dataSize -1; j++)
+{ //if it is not end of file read a character from file then save it into data
+//field in frame structure.
+frame.data[j]= fgetc(r_File1);
+sentChar++;//calculate how many characters will be sent.*/
+if (frame.data[j]
+{
+cout<< "There is the end of file"<<endl;
+isEnd = true;
+//sentChar++;
+break;
+}
+}
+if (isEnd == true)
+{
+pf[i] = frame; //save a frame into frame array.
+//frameCount = i;
+frameCount++;
+m_framecount = i +1;
+cout <<endl;
+cout << "The squence number is " << pf[i].sequenceNo <<endl;
+cout << "The start flag is " << pf[i].s_flag <<endl;
+cout << "The Data is---->" << pf[i].data <<endl;
+cout << "The end flag is " << pf[i].n_flag <<endl;
+cout << "There are " <<frameCount <<" frames has been created!"<<endl;
+cout << "frame " << pf[i].sequenceNo <<" has been transported!";
+cout<< endl;
+fclose(r_File1);
+break;
+}
+pf[i] = frame;//sava current frame to frame buffer.
+//display some informaiton of frame buffer.
+frameCount++;
+m_framecount = i +1;
+cout <<endl;
+cout << "The squence number is " << pf[i].sequenceNo <<endl;
+cout << "The start flag is " << pf[i].s_flag <<endl;
+cout << "The Data is---->" << pf[i].data <<endl;
+cout << "The end flag is " << pf[i].n_flag <<endl;
+cout << "There are total " <<frameCount <<" frames has been created!"<<endl;
+//cout << "frame " << pf[i].sequenceNo <<" has been transported!";
+cout<< endl;
+currentP = ftell(r_File1);//to record the current position of a file pointer
+}
+fflush(r_File1);//refresh
+}
+
+//print out some information.
+cout <<endl;
+cout <<"Total " << sentChar << " characters have been sent on this session!"<<endl;
+cout <<endl;
+cout << "waiting for ACK!" <<endl;
+cout <<endl;
+cout <<endl;
+int nextNoRecord = 0;
+cout<<"THE PROCESS ON RECEIVER SIDE..."<<endl;
+//open a file for write
+if((w_File2 = fopen(dp, "ab")) != NULL)
+{
+cout<<"opening a file for write..."<<endl;
+for (int m = 0; m < m_framecount ; m++)
+{
+for (int n = 0; n < dataSize -1; n++)
+{//check whether islast character.
+if(pf[m].data[n]
+{
+ack.nextSeq = THANKS;
+//fputc(pf[m].data[n],w_File2);
+recvedChar++;
+break;
+}
+//write the character from current frame 's which in t index of data flied.
+fputc(pf[m].data[n],w_File2);
+recvedChar++;
+}
+cout << "The string ---->" << pf[m].data <<" written succeed"<<endl;
+fflush(w_File2);//refresh
+if(ack.nextSeq == THANKS)
+{
+fclose(w_File2);
+break;
+}
+nextNoRecord= pf[m].sequenceNo;
+}
+
+cout <<endl;
+cout <<"Total "<<recvedChar << " characters have been received on this session"<<endl;
+cout <<endl;
+cout << "send acknowledgement!" <<endl;
+cout <<endl;
+cout <<endl;
+if (ack.nextSeq != THANKS)
+{
+cout<<"CheckACK"<<endl;
+if (nextNoRecord
+{
+ack.nextSeq =0 ;
+}
+else
+{
+ack.nextSeq = nextNoRecord +1;
+}
+cout << "The next expect frame is " << ack.nextSeq <<endl;
+}
+else
+{ cout<<"CheckACK"<<endl;
+cout << "The acknowledgement is thanks. The transmission complete..."<<endl;
+//delete the frame buffer array .
+delete []pf;
+}
+}
+else
+{cout << "File could not be opened" << endl;}
+cout <<endl;
+cout <<endl;
+}
+/*can be used to check how many bytes in the specified file
+numRead = 0;
+fseek(r_File1,0,SEEK_END);
+numRead = ftell(r_File1);
+cout << "There are " << numRead <<" Bytes in the file" << endl;*/
+}
+?OUTPUT
+1: use fixed source file name and fixed destination file name and fixed sliding
+
+window size (5) to test program.
+Read file successfully.
+Create frames successfully.
+Save frames into frame buffer which is size 5 successfully.
+Write data from frames successfully.
+Returns to ACK successfully.
+Re-create new frames successfully.
+Search the end of source file successfully.
+2: use keyboard to input the “source file name”, “destination file name”, “sliding
+windows size”, and “frame size” to test program
+Read file successfully.
+Create frames successfully.
+Save frames into frame buffer which is size 5 successfully.
+Write data from frames successfully.
+Returns to ACK successfully.
+Re-create new frames successfully.
+Search the end of source successfully.
+
+LAB-7
+?PROBLEM STATEMENT
+Implement CORBA mechanism by using „C++? program at one end and „Java? program
+on the other.
+?SOURCE CODE
+Creating the Server
+#include <iostream>
+#include "OB/CORBA.h"
+#include <OB/Cosnaming.h>
+#include "crypt.h"
+#include "cryptimpl.h"
+using namespace std;
+int main(int argc, char** argv)
+{
+// Declare ORB and servant object
+CORBA::ORB_var orb;
+CryptographicImpl* CrypImpl = NULL;
+try {
+// Initialize the ORB.
+orb = CORBA::ORB_init(argc, argv);
+// Get a reference to the root POA
+CORBA::Object_var rootPOAObj =
+orb->resolve_initial_references("RootPOA");
+// Narrow it to the correct type
+PortableServer::POA_var rootPOA =
+PortableServer::POA::_narrow(rootPOAObj.in());
+// Create POA policies
+CORBA::PolicyList policies;
+policies.length(1);
+policies[0] =
+rootPOA->create_thread_policy
+(PortableServer::SINGLE_THREAD_MODEL);
+// Get the POA manager object
+PortableServer::POAManager_var manager = rootPOA->the_POAManager();
+// Create a new POA with specified policies
+PortableServer::POA_var myPOA = rootPOA->create_POA
+("myPOA", manager, policies);
+// Free policies
+CORBA::ULong len = policies.length();
+for (CORBA::ULong i = 0; i < len; i++)
+policies[i]->destroy();
+// Get a reference to the Naming Service root_context
+CORBA::Object_var rootContextObj =
+orb->resolve_initial_references("NameService");
+// Narrow to the correct type
+CosNaming::NamingContext_var nc =
+CosNaming::NamingContext::_narrow(rootContextObj.in());
+// Create a reference to the servant
+CrypImpl = new CryptographicImpl(orb);
+// Activate object
+PortableServer::ObjectId_var myObjID =
+myPOA->activate_object(CrypImpl);
+// Get a CORBA reference with the POA through the servant
+CORBA::Object_var o = myPOA->servant_to_reference(CrypImpl);
+// The reference is converted to a character string
+CORBA::String_var s = orb->object_to_string(o);
+cout << "The IOR of the object is: " << s.in() << endl;
+CosNaming::Name name;
+name.length(1);
+name[0].id = (const char *) "CryptographicService";
+name[0].kind = (const char *) "";
+// Bind the object into the name service
+nc->rebind(name,o);
+// Activate the POA
+manager->activate();
+cout << "The server is ready.
+Awaiting for incoming requests..." << endl;
+// Start the ORB
+orb->run();
+} catch(const CORBA::Exception& e) {
+// Handles CORBA exceptions
+cerr << e << endl;
+}
+// Decrement reference count
+if (CrypImpl)
+CrypImpl->_remove_ref();
+// End CORBA
+if (!CORBA::is_nil(orb)){
+try{
+orb->destroy();
+cout << "Ending CORBA..." << endl;
+} catch (const CORBA::Exception& e)
+{
+cout << "orb->destroy() failed:" << e << endl;
+return 1;
+}
+}
+return 0;
+}
+?SOURCE CODE
+Implementing the Client
+#include <iostream>
+#include <string>
+#include "OB/CORBA.h"
+#include "OB/Cosnaming.h"
+#include "crypt.h"
+using namespace std;
+
+int main(int argc, char** argv)
+{
+// Declare ORB
+CORBA::ORB_var orb;
+try {
+// Initialize the ORB
+orb = CORBA::ORB_init(argc, argv);
+// Get a reference to the Naming Service
+CORBA::Object_var rootContextObj =
+orb->resolve_initial_references("NameService");
+CosNaming::NamingContext_var nc =
+CosNaming::NamingContext::_narrow(rootContextObj.in());
+CosNaming::Name name;
+name.length(1);
+name[0].id = (const char *) "CryptographicService";
+name[0].kind = (const char *) "";
+// Invoke the root context to retrieve the object reference
+CORBA::Object_var managerObj = nc->resolve(name);
+// Narrow the previous object to obtain the correct type
+::CaesarAlgorithm_var manager =
+::CaesarAlgorithm::_narrow(managerObj.in());
+string info_in,exit,dummy;
+CORBA::String_var info_out;
+::CaesarAlgorithm::charsequence_var inseq;
+unsigned long key,shift;
+try{
+do{
+cout << "\nCryptographic service client" << endl;
+cout << "----------------------------" << endl;
+do{ // Get the cryptographic key
+if (cin.fail())
+{
+cin.clear();
+cin >> dummy;
+}
+cout << "Enter encryption key: ";
+cin >> key;
+} while (cin.fail());
+do{ // Get the shift
+if (cin.fail())
+{
+cin.clear();
+cin >> dummy;
+}
+cout << "Enter a shift: ";
+cin >> shift;
+} while (cin.fail());
+// Used for debug pourposes
+//key = 9876453;
+//shift = 938372;
+
+getline(cin,dummy); // Get the text to encrypt
+cout << "Enter a plain text to encrypt: ";
+getline(cin,info_in);
+// Invoke first remote method
+inseq = manager->encrypt
+(info_in.c_str(),key,shift);
+cout << "------------------------------------------"
+<< endl;
+cout << "Encrypted text is: "
+<< inseq->get_buffer() << endl;
+// Invoke second remote method
+info_out = manager->decrypt(inseq.in(),key,shift);
+cout << "Decrypted text is: "
+<< info_out.in() << endl;
+cout << "-------------------------------------------"
+<< endl;
+cout << "Exit? (y/n): ";
+cin >> exit;
+} while (exit!="y");
+// Shutdown server message
+manager->shutdown();
+} catch(const std::exception& std_e){
+cerr << std_e.what() << endl;
+}
+}catch(const CORBA::Exception& e) {
+// Handles CORBA exceptions
+cerr << e << endl;
+}
+// End CORBA
+if (!CORBA::is_nil(orb)){
+try{
+orb->destroy();
+cout << "Ending CORBA..." << endl;
+} catch(const CORBA::Exception& e)
+{
+cout << "orb->destroy failed:" << e << endl;
+return 1;
+}
+}
+return 0;
+}
+
+?OUTPUT
+Running the Client-server Application Once we have implemented the client and the server, it?s time to connect them. Because our demonstration client and server exchange object references via the naming service, we must ensure that the naming service (which is called nameserv in Orbacus) is running. We use some command-line options to tell the naming service the host and port on which it should listen. nameserv -OAhost localhost -OAport 8140 After this, we can start the server with a command-line option to tell it how to contact the naming service. server -ORBInitRef NameService=corbaloc:iiop:localhost:8140/NameService Finally we can start the client, again with a command-line option to tell it how to contact the naming service. client -ORBInitRef NameService=corbaloc:iiop:localhost:8140/NameService
+Posted by Singh Gaurav at 1:03 AM 
+Email This
+BlogThis!
+Share to Twitter
+Share to Facebook
+Share to Pinterest
