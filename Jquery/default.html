@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>demo page</title>
+	<link rel="stylesheet" type="text/css" href="jqueryui/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="jqueryui/jquery-ui.structure.css">
+	<link rel="stylesheet" type="text/css" href="jqueryui/jquery-ui.theme.css">
+</head>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="jqueryui/jquery-ui.js"></script>
+<script type="text/javascript">// core jquery part
+	function chng() 
+	{
+		$("#para").fadeToggle(1000);
+		// body...
+	}
+</script>
+<script type="text/javascript">// jquery Ui started.
+	
+	$(document).ready(function()
+		{
+			$("#date").datepicker({        //datepicker event
+				changeYear:true,
+				changeMonth:true,
+				showWeek:true,
+				showOtherMonths:true,
+				weekHeader:"week no"
+			});
+
+			$("img").tooltip({              //tooltip event
+				track:false,
+				content:"Tulips are best flowers.",
+				show:{effect:"blind",duration:2000},
+				hide:{effect:"explode",duration:2000}
+			});
+
+			$("#thediv").accordion({          //accordion
+				collapsible:true,
+				event:"click",
+				animate:500,
+				active:0,
+				heightStyle:true,
+				icons:{header:"ui-icon-plus",activeHeader:"ui-icon-minus"}
+
+			});
+
+			$("#firstbutton").click(function() {    //dialog box
+		        $("#dgbox").dialog({
+		        	title:"Dialog Box",
+		        	draggable:true,
+		        	resizable:true,
+		        	height:500,
+		        	width:500,
+		        	modal:true,
+
+		        	buttons:[{
+		        		text:"Ok",
+		        		icon:"ui-icon-heart",
+		        		click: function() {
+		        			$(this).dialog("close");
+		        		}
+		        	},
+		        	{
+		        		text:"Close",
+		        		icon:"ui-icon-heart",
+		        		click: function() {
+		        			$(this).dialog("close");
+		        		}
+		        	}]
+		        });
+	        });
+			
+			var states=["Assam","Andhra Pradesh","Maharashtra","Madhya Pradesh","Punjab","Gujarat","Guwahati","Mizoaram","Meghalaya","Patna","Rajasthan","Chandigarh","New Delhi","New York","Bihar","Goa","Sri Lanka","Kerela","Karnataka","Mumbai","Arunachal Pradesh","Uttar Pradesh","Uttarakhand"];
+			$("#st").autocomplete({                     //autocomplete method
+				source: states,
+				autoFocus:true,
+			});
+
+			$("#ig").resizable({
+				aspectRatio:true,
+				ghost:true,
+				autoHide:true,
+			}).draggable();
+		});
+	
+</script>
+<body>
+	<h1 align="center">All Jquery Methods :)</h1>
+<h2>introduction to jquery & jqueryui</h2>
+<h3>jquery</h3>
+<button id="btn" onclick="chng()">Click</button>
+<br>
+<div id="mydiv" style="border: 2px solid green;">
+	<p id="para">This is a paragraph</p>
+</div>
+<br>
+<h3>jqueryUI</h3>
+<div id="seconddiv" style="border: 2px solid blue;">
+	<h3 align="center">Datepicker</h3>
+<input type="text" id="date" placeholder="Choose date">
+</div>
+<br>
+<div style="border: 2px solid lightgreen;">
+	<h3 align="center">Tooltip</h3>
+	<img src="C:\Users\Public\Pictures\Sample Pictures\Tulips.jpg" title="Tulips" width="300" height="200">
+</div><br>
+<!--accrodion-->
+<div id="thediv">
+	<h2>Java</h2>
+	<p>Java is a Object Oriented programming language.It is platform independent language,which provides you the write once run anywhere code.</p>
+	<h2>Android</h2>
+	<p>Android is a mobile application development programming language which basically uses java and kotlin as their core languages.</p>
+	<h2>Azure</h2>
+	<p>Azure is cloud computing platform launched by Microsoft in 2009.It provides PaaS(Platform As A Service) and SaaS(Software As A Service) to its users.</p>
+</div><br>
+<!--dialog box-->
+<button id="firstbutton">Click here</button><br>
+<div id="dgbox">
+	<h2>This is dialog box !</h2>
+	<p>Submit your feedback also.</p>
+</div><br>
+<div style="border:1px solid pink;">
+	<input type="text" placeholder="Enter your place" align="center" id="st">
+</div>
+<br>
+
+<div>
+	<img src="C:\Users\Public\Pictures\Sample Pictures\Penguins.jpg" id="ig" width="300" height="400">
+</div>
+<br>
+<div id="footer" style="border: 3px solid black">
+	<h1 align="center">Page Ends Here</h1>
+</div>
+</body>
+</html>
