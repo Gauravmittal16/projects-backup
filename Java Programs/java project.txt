@@ -1,0 +1,39 @@
+class createtablequery
+{
+public static void main(String []args)
+{
+Connection con=null;
+Statement st;
+try{
+Class.forName("com.mysql.jdbc.Driver");
+System.out.println("Driver loaded");
+con=DriverManager.getConnection("jdbc://localhost:3306/bank","root","8755");
+System.out.println("Connection Established");
+System.out.println("Creating Statement");
+st=con.createStatement();
+String sql="CREATE TABLE T1"+"(stu_id int(10),"+"stu_name varchar(5),"+"stu_rollno int(10,))";
+st.executeUpdate(SQL);}
+catch(ClassNotFound e){System.out.println("Exception "+e.getMessage);}
+catch(SQLException e)
+{System.out.println("Exception :"+e.getMessage);}
+finally
+{
+try{
+if(st!=null)
+con.close();}
+catch(SQLException e){}
+try{
+if(con!=null)
+con.close();}
+catch(SQLException e){
+e.printStackTrace();}
+}
+System.out.println("GoodBye!");
+}
+}
+
+
+
+
+
+

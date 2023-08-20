@@ -1,0 +1,91 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.1.33-community MySQL Community Server (GPL)
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| bank               |
+| bidder             |
+| employee           |
+| exercise           |
+| gaurav             |
+| mysql              |
+| mywebdata          |
+| practice_set       |
+| rms                |
+| students           |
+| test               |
+| unboxing           |
++--------------------+
+13 rows in set (0.14 sec)
+
+mysql> use test;
+Database changed
+mysql> create table products(id int(5) primary key,product_name varchar(10),unit
+_price int(5));
+Query OK, 0 rows affected (3.19 sec)
+
+mysql> insert into products values('1','cream','50');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into products values('2','powder','80');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into products values('22','pulses','200');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> create table products(id int(5) primary key,order_date date);
+ERROR 1050 (42S01): Table 'products' already exists
+mysql> create table orders(id int(5) primary key,order_date date);
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> insert into orders values('22','2019/06/17');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> insert into orders values('2','2019/04/27');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> create table ordersItems(id int(5) primary key,orderId int(5),productId i
+nt(5),quantity int(10),foreign key(orderId) references Orders(id),foreign key(pr
+oductid) references products(id));
+Query OK, 0 rows affected (0.57 sec)
+
+mysql> select orders.id,products.name,ordersItems.quantity,products.unit_price f
+rom ordersItems join orders on orders.id=ordersItems.orderId join products on pr
+oducts.id=ordersItems.productId;
+ERROR 1054 (42S22): Unknown column 'products.name' in 'field list'
+mysql> select orders.id,products.product_name,ordersItems.quantity,products.unit
+_price from ordersItems join orders on orders.id=ordersItems.orderId join produc
+ts on products.id=ordersItems.productId;
+Empty set (0.05 sec)
+
+mysql> insert into ordersItems values('2','22','2','4');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into ordersItems values('1','2','22','3');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> select orders.id,products.product_name,ordersItems.quantity,products.unit
+_price from ordersItems join orders on orders.id=ordersItems.orderId join produc
+ts on products.id=ordersItems.productId;
++----+--------------+----------+------------+
+| id | product_name | quantity | unit_price |
++----+--------------+----------+------------+
+|  2 | pulses       |        3 |        200 |
+| 22 | powder       |        4 |         80 |
++----+--------------+----------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select orders.id,products.product_name,ordersItems.quantity,products.unit
+_price from ordersItems join orders on orders.id=ordersItems.orderId join produc
+ts on products.id=ordersItems.productId;
+
+---------------------------------------------------------------------------+------------------------------------------------------+----------------------------------------------------------------
+select products.product_name from products where not exists
+(select ordersitems.id from ordersitems where products.id=ordersitems.id)
