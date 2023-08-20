@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		TextBoxes
+	</title>
+</head>
+<script type="text/javascript">
+	function valid() 
+	{
+		// body...
+		
+		var user=document.getElementById("user").value;
+		var pass=document.getElementById("pass").value;
+		if(user==pass)
+		{
+			alert("Successfully Signed in as "+user);
+		}
+		else
+		{
+		alert("Invaid username or password");	
+		}
+
+	}
+</script>
+<body>
+<div id="txt">
+	<input type="text" name="username" id="user" placeholder="Enter username">
+	<br>
+	<input type="password" name="password" id="pass" placeholder="password"><br>
+	<button onclick="valid()" id="submit">Submit </button>
+</div>
+</body>
+</html>

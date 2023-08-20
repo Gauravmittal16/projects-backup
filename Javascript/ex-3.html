@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Exercise 3rd</title>
+</head>
+<script type="text/javascript">
+	function chng() 
+	{
+		var para=document.getElementsByClassName("hding");
+		for (var i = 0; i < para.length; i++) 
+		{
+			para[i].style.color="lightblue";
+		}
+	}
+
+function newImage() 
+{
+	// body...
+	document.getElementById("im").src="C:/Users/Public/Pictures/Sample Pictures/Penguins.jpg";
+}
+function oldImage() 
+{
+document.getElementById("im").src="C:/Users/Public/Pictures/Sample Pictures/Desert.jpg";	// body...
+}
+</script>
+<body>
+<div name="classes">
+	<p class="hding">This is a web page</p>
+		<p class="hding">This is a web page</p>
+			<p class="hding">This is a web page</p>
+				<p class="hding">This is a web page</p>
+				<button onclick="chng()">Click me!</button>
+</div>
+
+<div name="images">
+	<img  id="im" src="C:\Users\Public\Pictures\Sample Pictures\Desert.jpg" width="300" height="200" onmouseover="newImage()" onmouseout="oldImage()">
+</div>
+</body>
+</html>
